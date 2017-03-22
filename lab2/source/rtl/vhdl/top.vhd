@@ -37,7 +37,7 @@ entity top is
 end top;
 
 architecture rtl of top is
-   
+
   constant RES_NUM : natural := 6;
 
   type t_param_array is array (0 to RES_NUM-1) of natural;
@@ -121,27 +121,12 @@ architecture rtl of top is
   );
   end component;
   
-component reg is
-	generic(
-		WIDTH    : positive := 1;
-		RST_INIT : integer := 0
-	);
-	port(
-		i_clk  : in  std_logic;
-		in_rst : in  std_logic;
-		i_d    : in  std_logic_vector(WIDTH-1 downto 0);
-		o_q    : out std_logic_vector(WIDTH-1 downto 0)
-	);
-end component reg;
-
-  
   
   constant update_period     : std_logic_vector(31 downto 0) := conv_std_logic_vector(1, 32);
   
   constant GRAPH_MEM_ADDR_WIDTH : natural := MEM_ADDR_WIDTH + 6;-- graphics addres is scales with minumum char size 8*8 log2(64) = 6
   
   -- text
-  signal vga_vsync_s  		  : std_logic;
   signal message_lenght      : std_logic_vector(MEM_ADDR_WIDTH-1 downto 0);
   signal graphics_lenght     : std_logic_vector(GRAPH_MEM_ADDR_WIDTH-1 downto 0);
   
@@ -172,10 +157,9 @@ end component reg;
   signal dir_pixel_column    : std_logic_vector(10 downto 0);
   signal dir_pixel_row       : std_logic_vector(10 downto 0);
   
-  signal txt_addr_reg 		  : std_logic_vector(MEM_ADDR_WIDTH-1 downto 0);
-  signal next_txt_addr		  : std_logic_vector(MEM_ADDR_WIDTH-1 downto 0);
-  signal tmp_signal			  : std_logic_vector(MEM_ADDR_WIDTH-1 downto 0);
-  signal tmp_ulaz			  	  : std_logic_vector(MEM_ADDR_WIDTH-1 downto 0);
+  signal cnt 					  : std_logic_vector(13 downto 0) := "00000000000000";
+  signal cnt2					  : std_logic_vector(19 downto 0) := "00000000000000000000";
+  
 
 begin
 
@@ -188,8 +172,11 @@ begin
   graphics_lenght <= conv_std_logic_vector(MEM_SIZE*8*8, GRAPH_MEM_ADDR_WIDTH);
   
   -- removed to inputs pin
+  --direct_mode <= '1';
+  --display_mode <= "10";  -- 01 - text mode, 10 - graphics mode, 11 - text & graphics
   direct_mode <= '0';
-  display_mode     <= "01";  -- 01 - text mode, 10 - graphics mode, 11 - text & graphics
+  --display_mode <= "01";
+  display_mode <= "10";
   
   font_size        <= x"1";
   show_frame       <= '1';
@@ -231,14 +218,14 @@ begin
     clk_i              => clk_i,
     reset_n_i          => reset_n_i,
     --
-    direct_mode_i      => direct_mode,
+    direct_mode_i      => direct_mode_i,
     dir_red_i          => dir_red,
     dir_green_i        => dir_green,
     dir_blue_i         => dir_blue,
     dir_pixel_column_o => dir_pixel_column,
     dir_pixel_row_o    => dir_pixel_row,
     -- cfg
-    display_mode_i     => display_mode,  -- 01 - text mode, 10 - graphics mode, 11 - text & graphics
+    display_mode_i     => display_mode_i,  -- 01 - text mode, 10 - graphics mode, 11 - text & graphics
     -- text mode interface
     text_addr_i        => char_address,
     text_data_i        => char_value,
@@ -255,7 +242,7 @@ begin
     frame_color_i      => frame_color,
     -- vga
     vga_hsync_o        => vga_hsync_o,
-    vga_vsync_o        => vga_vsync_s,
+    vga_vsync_o        => vga_vsync_o,
     blank_o            => blank_o,
     pix_clock_o        => pix_clock_s,
     vga_rst_n_o        => vga_rst_n_s,
@@ -263,68 +250,183 @@ begin
     sync_o             => sync_o,
     red_o              => red_o,
     green_o            => green_o,
-    blue_o             => blue_o   
-	 
+    blue_o             => blue_o     
   );
   
-  next_txt_addr <= txt_addr_reg + 1 when txt_addr_reg < 1200
-						 else (others => '0');
+  -- na osnovu signala iz vga_top modula dir_pixel_column i dir_pixel_row realizovati logiku koja genereise
+  --dir_red
+  --dir_green
+  --dir_blue
   
+  dir_red <= x"ff" when dir_pixel_column < 640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 2*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 3*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 4*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 5*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 6*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 7*640/8 else
+				 x"00";
+		
+  dir_green <= x"ff" when dir_pixel_column < 640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 2*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 3*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 4*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 5*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 6*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 7*640/8 else
+				 x"00";
+				 
+	dir_blue <= x"ff" when dir_pixel_column < 640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 2*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 3*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 4*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 5*640/8 else
+				 x"00" when dir_pixel_column >= 640/8 and dir_pixel_column < 6*640/8 else
+				 x"ff" when dir_pixel_column >= 640/8 and dir_pixel_column < 7*640/8 else
+				 x"00";
+				 
+  -- koristeci signale realizovati logiku koja pise po TXT_MEM
+  --char_address
+  --char_value
+  --char_we
   
+  char_we <= '1';
+  char_address <= cnt;
   
--- dir_red <=  x"ff" when dir_pixel_column >= 0 and dir_pixel_column < H_RES/8 else				
---              x"ff" when dir_pixel_column >= H_RES/8 and dir_pixel_column < 2*(H_RES/8) else
---				x"ff" when dir_pixel_column >= 4*(H_RES/8) and dir_pixel_column < 5*(H_RES/8) else
---				x"ff" when dir_pixel_column >= 5*(H_RES/8) and dir_pixel_column < 6*(H_RES/8) else
---					x"00";
---					
---	dir_green <=   x"ff" when dir_pixel_column >= 0 and dir_pixel_column < H_RES/8 else
---					x"ff" when dir_pixel_column >= H_RES/8 and dir_pixel_column < 2*(H_RES/8) else
---					x"ff" when dir_pixel_column >= 2*(H_RES/8) and dir_pixel_column < 3*(H_RES/8) else
---					x"ff" when dir_pixel_column >= 3*(H_RES/8) and dir_pixel_column < 4*(H_RES/8) else
---					x"00";						
---	dir_blue <= x"ff" when dir_pixel_column >= 0 and dir_pixel_column < H_RES/8 else
---					x"ff" when dir_pixel_column >= 2*(H_RES/8) and dir_pixel_column < 3*(H_RES/8) else
---					x"ff" when dir_pixel_column >= 4*(H_RES/8) and dir_pixel_column < 5*(H_RES/8) else
---					x"ff" when dir_pixel_column >= 6*(H_RES/8) and dir_pixel_column < 7*(H_RES/8) else
---				x"00";
-				
-	vga_vsync_o <= vga_vsync_s;			  
-	char_we <= NOT vga_vsync_s;
-	
-	
-	cnt_reg1: reg
-  generic map(
-		WIDTH    => MEM_ADDR_WIDTH,
-		RST_INIT => 0
-	)
-   port map(
-		i_clk  => pix_clock_s,
-		in_rst => vga_rst_n_s,
-		i_d    => char_address,
-		o_q    => txt_addr_reg
-	);
-
-	   
-	
-	char_address <= txt_addr_reg + 1;
-	
-	process(txt_addr_reg)begin
-
-			if (txt_addr_reg = 41) then
-				char_value <= conv_std_logic_vector(14, 6);
+  process (pix_clock_s) begin
+		if(rising_edge(pix_clock_s))then
+			if(cnt = 1199)then
+				cnt <= (others => '0');
 			else
-				char_value <= conv_std_logic_vector(32, 6);
+				cnt <= cnt + 1;
 			end if;
-	
+		end if;
 	end process;
 	
-	
+  process (char_address, cnt) begin
+		if (cnt = 50) then
+			char_address <= cnt;
+			char_value <= conv_std_logic_vector (12, 6);	
+		elsif (cnt = 51) then
+			char_address <= cnt;
+			char_value <= conv_std_logic_vector (16, 6);
+		elsif (cnt = 52) then
+			char_address <= cnt;
+			char_value <= conv_std_logic_vector (18, 6);
+		elsif (cnt = 53) then
+			char_address <= cnt;
+			char_value <= conv_std_logic_vector (19, 6);
+		else 
+			char_address <= cnt;
+			char_value <= conv_std_logic_vector (32, 6); 
+		end if;
+  end process;
   
   -- koristeci signale realizovati logiku koja pise po GRAPH_MEM
   --pixel_address
   --pixel_value
   --pixel_we
+  
+  
+  process (pix_clock_s) begin
+		if(rising_edge(pix_clock_s))then
+			if(cnt2 = 9599)then
+				cnt2 <= (others => '0');
+			else
+				cnt2 <= cnt2 + 1;
+			end if;
+		end if;
+	end process;
+
+	pixel_we <= '1';
+	pixel_address <= cnt2;
+
+	process(cnt2)begin
+		if(cnt2 = 4970)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 4990)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5010)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5030)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5050)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5070)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5090)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5110)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5130)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5150)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5170)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5190)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5210)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5230)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5250)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5270)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5290)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5310)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5330)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5350)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5370)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5390)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5410)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5430)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5450)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5470)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5490)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5510)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5530)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5550)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5570)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5590)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5610)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5630)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5650)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5670)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5690)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5710)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5730)then
+			pixel_value <= x"ffffffff";
+		elsif(cnt2 = 5750)then
+			pixel_value <= x"ffffffff";
+		else
+			pixel_value <= x"00000000";
+		end if;
+	end process;
+			
   
   
 end rtl;

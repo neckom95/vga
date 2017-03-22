@@ -36,7 +36,7 @@ Setup/Hold to clock clk_i
             |Max Setup to|  Process   |Max Hold to |  Process   |                     | Clock  |
 Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s)    | Phase  |
 ------------+------------+------------+------------+------------+---------------------+--------+
-reset_n_i   |    5.497(R)|      SLOW  |   -2.794(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+reset_n_i   |    4.412(R)|      SLOW  |   -2.117(R)|      SLOW  |vga_top_i/vga_i/clk_s|   0.000|
 ------------+------------+------------+------------+------------+---------------------+--------+
 
 Clock clk_i to Pad
@@ -44,37 +44,37 @@ Clock clk_i to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                     | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s)    | Phase  |
 ------------+-----------------+------------+-----------------+------------+---------------------+--------+
-blank_o     |        13.549(R)|      SLOW  |         6.026(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<0>   |        14.719(R)|      SLOW  |         6.752(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<1>   |        14.719(R)|      SLOW  |         6.752(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<2>   |        14.809(R)|      SLOW  |         6.783(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<3>   |        16.001(R)|      SLOW  |         7.449(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<4>   |        14.451(R)|      SLOW  |         6.575(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<5>   |        14.801(R)|      SLOW  |         6.775(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<6>   |        15.274(R)|      SLOW  |         7.096(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-blue_o<7>   |        14.653(R)|      SLOW  |         6.676(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<0>  |        15.785(R)|      SLOW  |         6.999(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<1>  |        15.128(R)|      SLOW  |         7.002(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<2>  |        14.958(R)|      SLOW  |         6.908(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<3>  |        15.003(R)|      SLOW  |         6.948(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<4>  |        16.169(R)|      SLOW  |         7.524(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<5>  |        14.719(R)|      SLOW  |         6.765(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<6>  |        16.374(R)|      SLOW  |         7.653(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-green_o<7>  |        14.074(R)|      SLOW  |         6.312(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blank_o     |        13.579(R)|      SLOW  |         6.022(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<0>   |        15.342(R)|      SLOW  |         7.031(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<1>   |        15.526(R)|      SLOW  |         7.129(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<2>   |        14.368(R)|      SLOW  |         6.522(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<3>   |        15.560(R)|      SLOW  |         7.178(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<4>   |        14.828(R)|      SLOW  |         6.760(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<5>   |        14.573(R)|      SLOW  |         6.651(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<6>   |        15.628(R)|      SLOW  |         7.231(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+blue_o<7>   |        15.469(R)|      SLOW  |         7.072(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<0>  |        16.404(R)|      SLOW  |         7.428(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<1>  |        15.579(R)|      SLOW  |         7.324(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<2>  |        15.854(R)|      SLOW  |         7.522(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<3>  |        15.444(R)|      SLOW  |         7.264(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<4>  |        15.773(R)|      SLOW  |         7.290(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<5>  |        15.142(R)|      SLOW  |         7.070(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<6>  |        15.927(R)|      SLOW  |         7.373(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+green_o<7>  |        14.614(R)|      SLOW  |         6.667(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
 pix_clock_o |        12.109(R)|      SLOW  |         5.212(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
             |        12.047(F)|      SLOW  |         5.146(F)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-psave_o     |        13.704(R)|      SLOW  |         6.174(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<0>    |        17.785(R)|      SLOW  |         8.570(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<1>    |        17.645(R)|      SLOW  |         8.504(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<2>    |        17.349(R)|      SLOW  |         8.316(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<3>    |        17.361(R)|      SLOW  |         8.333(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<4>    |        17.582(R)|      SLOW  |         8.463(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<5>    |        16.927(R)|      SLOW  |         8.005(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<6>    |        16.802(R)|      SLOW  |         7.951(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-red_o<7>    |        16.786(R)|      SLOW  |         7.950(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-sync_o      |        13.504(R)|      SLOW  |         5.996(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-vga_hsync_o |        13.988(R)|      SLOW  |         6.341(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
-vga_vsync_o |        14.798(R)|      SLOW  |         6.855(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+psave_o     |        12.695(R)|      SLOW  |         5.585(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<0>    |        17.130(R)|      SLOW  |         8.210(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<1>    |        17.314(R)|      SLOW  |         8.333(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<2>    |        17.031(R)|      SLOW  |         8.151(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<3>    |        16.862(R)|      SLOW  |         8.082(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<4>    |        17.051(R)|      SLOW  |         8.182(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<5>    |        16.586(R)|      SLOW  |         7.828(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<6>    |        16.453(R)|      SLOW  |         7.781(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+red_o<7>    |        16.453(R)|      SLOW  |         7.781(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+sync_o      |        13.787(R)|      SLOW  |         6.147(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+vga_hsync_o |        13.927(R)|      SLOW  |         6.294(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
+vga_vsync_o |        13.754(R)|      SLOW  |         6.207(R)|      FAST  |vga_top_i/vga_i/clk_s|   0.000|
 ------------+-----------------+------------+-----------------+------------+---------------------+--------+
 
 Clock to Setup on destination clock clk_i
@@ -82,18 +82,18 @@ Clock to Setup on destination clock clk_i
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk_i          |    6.594|         |         |         |
+clk_i          |   10.878|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Wed Mar 15 12:16:22 2017 
+Analysis completed Wed Mar 22 11:33:58 2017 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 261 MB
+Peak Memory Usage: 265 MB
 
 
 

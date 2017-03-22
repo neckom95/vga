@@ -10,23 +10,23 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Wed Mar 15 12:16:03 2017
+Mapped Date    : Wed Mar 22 11:33:38 2017
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    1
 Slice Logic Utilization:
-  Number of Slice Registers:                    36 out of  54,576    1%
-    Number used as Flip Flops:                  36
+  Number of Slice Registers:                    54 out of  54,576    1%
+    Number used as Flip Flops:                  54
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                         37 out of  27,288    1%
-    Number used as logic:                       34 out of  27,288    1%
-      Number using O6 output only:              15
-      Number using O5 output only:              16
-      Number using O5 and O6:                    3
+  Number of Slice LUTs:                        105 out of  27,288    1%
+    Number used as logic:                      101 out of  27,288    1%
+      Number using O6 output only:              54
+      Number using O5 output only:              34
+      Number using O5 and O6:                   13
       Number used as ROM:                        0
     Number used as Memory:                       1 out of   6,408    1%
       Number used as Dual Port RAM:              0
@@ -35,21 +35,21 @@ Slice Logic Utilization:
         Number using O6 output only:             1
         Number using O5 output only:             0
         Number using O5 and O6:                  0
-    Number used exclusively as route-thrus:      2
+    Number used exclusively as route-thrus:      3
       Number with same-slice register load:      0
-      Number with same-slice carry load:         2
+      Number with same-slice carry load:         3
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                    20 out of   6,822    1%
-  Number of MUXCYs used:                        24 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:           43
-    Number with an unused Flip Flop:             9 out of      43   20%
-    Number with an unused LUT:                   6 out of      43   13%
-    Number of fully used LUT-FF pairs:          28 out of      43   65%
-    Number of unique control sets:               7
+  Number of occupied Slices:                    42 out of   6,822    1%
+  Number of MUXCYs used:                        44 out of  13,644    1%
+  Number of LUT Flip Flop pairs used:          113
+    Number with an unused Flip Flop:            59 out of     113   52%
+    Number with an unused LUT:                   8 out of     113    7%
+    Number of fully used LUT-FF pairs:          46 out of     113   40%
+    Number of unique control sets:               9
     Number of slice register sites lost
-      to control set restrictions:              43 out of  54,576    1%
+      to control set restrictions:              57 out of  54,576    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -63,7 +63,7 @@ IO Utilization:
     IOB Flip Flops:                              1
 
 Specific Feature Utilization:
-  Number of RAMB16BWERs:                         0 out of     116    0%
+  Number of RAMB16BWERs:                         1 out of     116    1%
   Number of RAMB8BWERs:                          0 out of     232    0%
   Number of BUFIO2/BUFIO2_2CLKs:                 1 out of      32    3%
     Number used as BUFIO2s:                      1
@@ -84,7 +84,7 @@ Specific Feature Utilization:
   Number of BUFHs:                               0 out of     256    0%
   Number of BUFPLLs:                             0 out of       8    0%
   Number of BUFPLL_MCBs:                         0 out of       4    0%
-  Number of DSP48A1s:                            0 out of      58    0%
+  Number of DSP48A1s:                            1 out of      58    1%
   Number of ICAPs:                               0 out of       1    0%
   Number of MCBs:                                0 out of       2    0%
   Number of PCILOGICSEs:                         0 out of       2    0%
@@ -93,11 +93,11 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                3.30
+Average Fanout of Non-Clock Nets:                3.24
 
-Peak Memory Usage:  434 MB
-Total REAL time to MAP completion:  6 secs 
-Total CPU time to MAP completion:   5 secs 
+Peak Memory Usage:  438 MB
+Total REAL time to MAP completion:  7 secs 
+Total CPU time to MAP completion:   6 secs 
 
 Table of Contents
 -----------------
@@ -164,9 +164,9 @@ INFO:PhysDesignRules:1861 - To achieve optimal frequency synthesis performance
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-  20 block(s) removed
+  79 block(s) removed
    3 block(s) optimized away
-  41 signal(s) removed
+ 102 signal(s) removed
 
 Section 5 - Removed Logic
 -------------------------
@@ -207,6 +207,120 @@ The trimmed logic reported below is either:
    2. part of disabled logic
    3. a side-effect of other trimmed logic
 
+The signal "cnt<13>" is unused and has been removed.
+ Unused block "cnt_13" (SFF) removed.
+  The signal "Result<13>1" is unused and has been removed.
+   Unused block "Mcount_cnt_xor<13>" (XOR) removed.
+    The signal "Mcount_cnt_cy<12>" is unused and has been removed.
+     Unused block "Mcount_cnt_cy<12>" (MUX) removed.
+      The signal "Mcount_cnt_cy<11>" is unused and has been removed.
+       Unused block "Mcount_cnt_cy<11>" (MUX) removed.
+        The signal "Mcount_cnt_cy<10>" is unused and has been removed.
+         Unused block "Mcount_cnt_cy<10>" (MUX) removed.
+          The signal "Mcount_cnt_cy<9>" is unused and has been removed.
+           Unused block "Mcount_cnt_cy<9>" (MUX) removed.
+            The signal "Mcount_cnt_cy<8>" is unused and has been removed.
+             Unused block "Mcount_cnt_cy<8>" (MUX) removed.
+              The signal "Mcount_cnt_cy<7>" is unused and has been removed.
+               Unused block "Mcount_cnt_cy<7>" (MUX) removed.
+                The signal "Mcount_cnt_cy<6>" is unused and has been removed.
+                 Unused block "Mcount_cnt_cy<6>" (MUX) removed.
+                  The signal "Mcount_cnt_cy<5>" is unused and has been removed.
+                   Unused block "Mcount_cnt_cy<5>" (MUX) removed.
+                    The signal "Mcount_cnt_cy<4>" is unused and has been removed.
+                     Unused block "Mcount_cnt_cy<4>" (MUX) removed.
+                      The signal "Mcount_cnt_cy<3>" is unused and has been removed.
+                       Unused block "Mcount_cnt_cy<3>" (MUX) removed.
+                        The signal "Mcount_cnt_cy<2>" is unused and has been removed.
+                         Unused block "Mcount_cnt_cy<2>" (MUX) removed.
+                          The signal "Mcount_cnt_cy<1>" is unused and has been removed.
+                           Unused block "Mcount_cnt_cy<1>" (MUX) removed.
+                            The signal "Mcount_cnt_cy<0>" is unused and has been removed.
+                             Unused block "Mcount_cnt_cy<0>" (MUX) removed.
+                              The signal "Mcount_cnt_lut<0>" is unused and has been removed.
+                               Unused block "Mcount_cnt_lut<0>_INV_0" (BUF) removed.
+                            The signal "Mcount_cnt_cy<1>_rt" is unused and has been removed.
+                             Unused block "Mcount_cnt_cy<1>_rt" (ROM) removed.
+                          The signal "Mcount_cnt_cy<2>_rt" is unused and has been removed.
+                           Unused block "Mcount_cnt_cy<2>_rt" (ROM) removed.
+                        The signal "Mcount_cnt_cy<3>_rt" is unused and has been removed.
+                         Unused block "Mcount_cnt_cy<3>_rt" (ROM) removed.
+                      The signal "Mcount_cnt_cy<4>_rt" is unused and has been removed.
+                       Unused block "Mcount_cnt_cy<4>_rt" (ROM) removed.
+                        The signal "cnt<4>" is unused and has been removed.
+                         Unused block "cnt_4" (SFF) removed.
+                          The signal "Result<4>1" is unused and has been removed.
+                           Unused block "Mcount_cnt_xor<4>" (XOR) removed.
+                          The signal "GND_5_o_GND_5_o_equal_70_o" is unused and has been removed.
+                           Unused block "GND_5_o_GND_5_o_equal_70_o3" (ROM) removed.
+                            The signal "cnt<5>" is unused and has been removed.
+                             Unused block "cnt_5" (SFF) removed.
+                              The signal "Result<5>1" is unused and has been removed.
+                               Unused block "Mcount_cnt_xor<5>" (XOR) removed.
+                                The signal "Mcount_cnt_cy<5>_rt" is unused and has been removed.
+                                 Unused block "Mcount_cnt_cy<5>_rt" (ROM) removed.
+                            The signal "GND_5_o_GND_5_o_equal_70_o1" is unused and has been removed.
+                             Unused block "GND_5_o_GND_5_o_equal_70_o1" (ROM) removed.
+                              The signal "cnt<10>" is unused and has been removed.
+                               Unused block "cnt_10" (SFF) removed.
+                                The signal "Result<10>1" is unused and has been removed.
+                                 Unused block "Mcount_cnt_xor<10>" (XOR) removed.
+                                  The signal "Mcount_cnt_cy<10>_rt" is unused and has been removed.
+                                   Unused block "Mcount_cnt_cy<10>_rt" (ROM) removed.
+                            The signal "GND_5_o_GND_5_o_equal_70_o2" is unused and has been removed.
+                             Unused block "GND_5_o_GND_5_o_equal_70_o2" (ROM) removed.
+                              The signal "cnt<8>" is unused and has been removed.
+                               Unused block "cnt_8" (SFF) removed.
+                                The signal "Result<8>1" is unused and has been removed.
+                                 Unused block "Mcount_cnt_xor<8>" (XOR) removed.
+                                  The signal "Mcount_cnt_cy<8>_rt" is unused and has been removed.
+                                   Unused block "Mcount_cnt_cy<8>_rt" (ROM) removed.
+                              The signal "cnt<9>" is unused and has been removed.
+                               Unused block "cnt_9" (SFF) removed.
+                                The signal "Result<9>1" is unused and has been removed.
+                                 Unused block "Mcount_cnt_xor<9>" (XOR) removed.
+                                  The signal "Mcount_cnt_cy<9>_rt" is unused and has been removed.
+                                   Unused block "Mcount_cnt_cy<9>_rt" (ROM) removed.
+                              The signal "cnt<6>" is unused and has been removed.
+                               Unused block "cnt_6" (SFF) removed.
+                                The signal "Result<6>1" is unused and has been removed.
+                                 Unused block "Mcount_cnt_xor<6>" (XOR) removed.
+                                  The signal "Mcount_cnt_cy<6>_rt" is unused and has been removed.
+                                   Unused block "Mcount_cnt_cy<6>_rt" (ROM) removed.
+                              The signal "cnt<12>" is unused and has been removed.
+                               Unused block "cnt_12" (SFF) removed.
+                                The signal "Result<12>1" is unused and has been removed.
+                                 Unused block "Mcount_cnt_xor<12>" (XOR) removed.
+                                  The signal "Mcount_cnt_cy<12>_rt" is unused and has been removed.
+                                   Unused block "Mcount_cnt_cy<12>_rt" (ROM) removed.
+                              The signal "cnt<11>" is unused and has been removed.
+                               Unused block "cnt_11" (SFF) removed.
+                                The signal "Result<11>1" is unused and has been removed.
+                                 Unused block "Mcount_cnt_xor<11>" (XOR) removed.
+                                  The signal "Mcount_cnt_cy<11>_rt" is unused and has been removed.
+                                   Unused block "Mcount_cnt_cy<11>_rt" (ROM) removed.
+                            The signal "cnt<7>" is unused and has been removed.
+                             Unused block "cnt_7" (SFF) removed.
+                              The signal "Result<7>1" is unused and has been removed.
+                               Unused block "Mcount_cnt_xor<7>" (XOR) removed.
+                                The signal "Mcount_cnt_cy<7>_rt" is unused and has been removed.
+                                 Unused block "Mcount_cnt_cy<7>_rt" (ROM) removed.
+    The signal "Mcount_cnt_xor<13>_rt" is unused and has been removed.
+     Unused block "Mcount_cnt_xor<13>_rt" (ROM) removed.
+The signal "GND_5_o_GND_5_o_equal_74_o" is unused and has been removed.
+ Unused block "GND_5_o_GND_5_o_equal_74_o1" (ROM) removed.
+  The signal "GND_5_o_GND_5_o_equal_74_o_bdd4" is unused and has been removed.
+   Unused block "GND_5_o_GND_5_o_equal_74_o3" (ROM) removed.
+    The signal "N6" is unused and has been removed.
+     Unused block "GND_5_o_GND_5_o_equal_74_o3_SW0" (ROM) removed.
+The signal "char_value<5>" is unused and has been removed.
+ Unused block "char_value<5>1" (ROM) removed.
+The signal "char_value<3>" is unused and has been removed.
+ Unused block "char_value<3>1" (ROM) removed.
+The signal "char_value<1>" is unused and has been removed.
+ Unused block "char_value<1>1" (ROM) removed.
+The signal "char_value<0>" is unused and has been removed.
+ Unused block "char_value<0>1" (ROM) removed.
 The signal "vga_top_i/txt_rom_addr_c<0>" is unused and has been removed.
 The signal "vga_top_i/txt_rom_addr_c<1>" is unused and has been removed.
 The signal "vga_top_i/txt_rom_addr_c<2>" is unused and has been removed.
@@ -221,14 +335,18 @@ The signal "vga_top_i/txt_rom_addr_c<10>" is unused and has been removed.
 The signal "vga_top_i/txt_rom_addr_c<11>" is unused and has been removed.
 The signal "vga_top_i/txt_rom_addr_c<12>" is unused and has been removed.
 The signal "vga_top_i/txt_rom_addr_c<13>" is unused and has been removed.
+The signal "vga_top_i/char_addr_s<0>" is unused and has been removed.
+The signal "vga_top_i/char_addr_s<1>" is unused and has been removed.
+The signal "vga_top_i/char_addr_s<2>" is unused and has been removed.
+The signal "vga_top_i/char_addr_s<3>" is unused and has been removed.
 The signal "vga_top_i/char_addr_s<4>" is unused and has been removed.
 The signal "vga_top_i/char_addr_s<5>" is unused and has been removed.
 The signal "vga_top_i/text_mem_i/index<0>" is unused and has been removed.
- Unused block "vga_top_i/text_mem_i/Mmux_index11" (ROM) removed.
+ Unused block "vga_top_i/text_mem_i/Mmux_index14" (ROM) removed.
   The signal "N16" is unused and has been removed.
-   Unused block "vga_top_i/text_mem_i/index_t[30]_GND_22_o_LessThan_5_o1_SW2" (ROM)
+   Unused block "vga_top_i/text_mem_i/index_t[30]_GND_22_o_LessThan_5_o1_SW1" (ROM)
 removed.
-  The signal "N2" is unused and has been removed.
+  The signal "N0" is unused and has been removed.
    Unused block "vga_top_i/text_mem_i/index_t[30]_GND_22_o_LessThan_5_o1_SW0" (ROM)
 removed.
 The signal "vga_top_i/text_mem_i/index<1>" is unused and has been removed.
@@ -260,6 +378,8 @@ Unused block "vga_top_i/char_rom_i/BRAM_MEM_I/B6/RAMB16BWER" (RAMB16BWER)
 removed.
 Unused block "vga_top_i/char_rom_i/BRAM_MEM_I/GND" (ZERO) removed.
 Unused block "vga_top_i/char_rom_i/BRAM_MEM_I/VCC" (ONE) removed.
+Unused block "vga_top_i/text_mem_i/Mram_text_mem1" (RAMB16BWER) removed.
+Unused block "vga_top_i/text_mem_i/Mram_text_mem2" (RAMB16BWER) removed.
 Unused block "vga_top_i/text_mem_i/Mram_text_mem3" (RAMB16BWER) removed.
 
 Optimized Block(s):
